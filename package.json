@@ -1,0 +1,21 @@
+{
+  "name": "event-observer",
+  "version": "1.0.0",
+  "description": "Treat DOM events like Arrays",
+  "main": "EventObserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "jonathantneal/event-observer",
+  "keywords": [
+    "javascript",
+    "events",
+    "observers",
+    "arrays",
+    "dom"
+  ],
+  "author": "Jonathan Neal <jonathantneal@hotmail.com> (http://jonathantneal.com)",
+  "license": "CC0-1.0",
+  "bugs": "https://github.com/jonathantneal/event-observer/issues",
+  "homepage": "https://github.com/jonathantneal/event-observer#readme"
+}
