@@ -1,0 +1,228 @@
+<!doctype html>
+<title>EventObserver</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="style.css" rel="stylesheet">
+<script src="EventObserver.js"></script>
+
+<h1>EventObserver</h1>
+
+<p><strong>EventObserver</strong> lets you treat DOM events like Arrays.
+
+<pre>
+document.<span data-function>on</span>(<span data-string>"keydown"</span>).<span data-function>forEach</span>(<span data-keyword>function</span> (event) {
+	<span data-comment>// log every key code</span>
+	console.<span data-function>log</span>(event.keyCode);
+});
+</pre>
+
+<p>Event manipulation is as easy as working with arrays.</p>
+
+<pre>
+document.<span data-function>on</span>(<span data-string>"keydown"</span>).<span data-function>map</span>(<span data-keyword>function</span> (event) {
+	<span data-comment>// only care about the key</span>
+	<span data-keyword>return</span> event.keyCode;
+}).<span data-function>filter</span>(<span data-keyword>function</span> (keyCode) {
+	<span data-comment>// only care when the key is between 50 and 100</span>
+	<span data-keyword>return</span> keyCode &gt;= <span data-number>50</span> &amp;&amp; keyCode &lt;= <span data-number>100</span>;
+}).<span data-function>forEach</span>(<span data-keyword>function</span> (keyCode) {
+	<span data-comment>// log every filtered code</span>
+	console.<span data-function>log</span>(keyCode);
+});
+</pre>
+
+<p>To see EventObserver in action, visit the <a href="demo.html">live demo</a>.</p>
+
+<h2>Constructor</h2>
+
+<!-- EVENT OBSERVER -->
+<h3 id="EventObserver"><a href="#EventObserver">EventObserver</a></h3>
+
+<p>Returns a newly instantiated event observer.</p>
+
+<pre>
+EventObserver(
+	<span data-keyword>Node</span> target,
+	<span data-keyword>String</span> type
+);
+</pre>
+
+<h4 id="EventObserver-Example_usage"><a href="#EventObserver-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// observe any keypress within the document</span>
+var onkeypress = new EventObserver(document, <span data-string>'keypress'</span>);
+</pre>
+
+<!-- ON -->
+<h3 id="Element-on()"><a href="#Element-on()">on()</a></h3>
+
+<p>Returns a newly instantiated event observer.</p>
+
+<pre>
+void on(
+	<span data-keyword>String</span> type
+);
+</pre>
+
+<h4 id="Element-on()-Example_usage"><a href="#Element-on()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// observe any keypress within the document</span>
+var onkeypress = document.<span data-function>on</span>(<span data-string>'keypress'</span>);
+</pre>
+
+<h2>Instance methods</h2>
+
+<!-- FOR EACH -->
+<h3 id="EventObserver-forEach()"><a href="#EventObserver-forEach()">forEach()</a></h3>
+
+<p>Returns the observer, and executes all of the event data with the provided function.</p>
+
+<pre>void forEach(
+	<span data-keyword>Function</span> callback
+);</pre>
+
+<h4>Parameters</h4>
+
+<dl>
+	<dt>callback</dt>
+	<dd>Function that is called when an event occurs.</dd>
+
+	<dl>
+		<dt>event</dt>
+		<dd>Event data that is dispatched</dd>
+	</dl>
+</dl>
+
+<h4 id="EventObserver-forEach()-Example_usage"><a href="#EventObserver-forEach()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// log the keycode each time a key is pressed</span>
+document.<span data-function>on</span>(<span data-string>'keypress'</span>).<span data-function>forEach</span>(<span data-keyword>function</span> (event) {
+	console.<span data-function>log</span>(event.keyCode);
+});
+</pre>
+
+<!-- FILTER -->
+<h3 id="EventObserver-filter()"><a href="#EventObserver-filter()">filter()</a></h3>
+
+<p>Returns a new observer with the event data passing the test implemented by the provided function.</p>
+
+<pre>void filter(
+	<span data-keyword>Function</span> callback
+);</pre>
+
+<h4 id="EventObserver-filter()-Parameters"><a href="#EventObserver-filter()-Parameters">Parameters</a></h4>
+
+<dl>
+	<dt>callback()</dt>
+	<dd>Function that is called when an event occurs.</dd>
+
+	<dl>
+		<dt>event =></dt>
+		<dd>Event data that is dispatched</dd>
+	</dl>
+</dl>
+
+<h4 id="EventObserver-filter()-Example_usage"><a href="#EventObserver-filter()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// only log events when the shift key is pressed</span>
+
+document.<span data-function>on</span>(<span data-string>'keypress'</span>).<span data-function>filter</span>(<span data-keyword>function</span> (event) {
+	<span data-comment>// only pass keypress events when the shift key is active</span>
+	return event.shiftKey;
+}).<span data-function>forEach</span>(<span data-keyword>function</span> (event) {
+	<span data-comment>// log keypress events when the shift key is active</span>
+	console.<span data-function>log</span>(event.keyCode);
+});
+</pre>
+
+<!-- MAP -->
+<h3 id="EventObserver-map()"><a href="#EventObserver-map()">map()</a></h3>
+
+<p>Returns a new observer with the event data returned by the provided function.</p>
+
+<pre>void map(
+	<span data-keyword>Function</span> callback
+);</pre>
+
+<h4 id="EventObserver-map()-Parameters"><a href="#EventObserver-map()-Parameters">Parameters</a></h4>
+
+<dl>
+	<dt>callback</dt>
+	<dd>Function that is called when an event occurs.</dd>
+
+	<dl>
+		<dt>event</dt>
+		<dd>Event data that is dispatched</dd>
+	</dl>
+</dl>
+
+<h4 id="EventObserver-map()-Example_usage"><a href="#EventObserver-map()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// log the keycode each time a key is pressed</span>
+
+document.<span data-function>on</span>(<span data-string>'keypress'</span>).<span data-function>map</span>(<span data-keyword>function</span> (event) {
+	return event.keyCode;
+}).<span data-function>forEach</span>(<span data-keyword>function</span> (keyCode) {
+	console.<span data-function>log</span>(keyCode);
+});
+</pre>
+
+<!-- STOP -->
+<h3 id="EventObserver-stop()"><a href="#EventObserver-stop()">stop()</a></h3>
+
+<p>Returns the observer, unsubscribing it from new event notifications.</p>
+
+<pre>void stop();</pre>
+
+<h4 id="EventObserver-stop()-Example_usage"><a href="#EventObserver-stop()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// log the key and stop</span>
+
+document.<span data-function>on</span>(<span data-string>'keypress'</span>).<span data-function>forEach</span>(<span data-keyword>function</span> (event) {
+	console.<span data-function>log</span>(event.keyCode);
+
+	onkeypress.<span data-function>stop</span>();
+});
+</pre>
+
+<!-- UNTIL -->
+<h3 id="EventObserver-until()"><a href="#EventObserver-until()">until()</a></h3>
+
+<p>Returns the observer, unsubscribing it from new event notifications once the event data passes the test implemented by the provided function.</p>
+
+<pre>void until(
+	<span data-keyword>Function</span> callback
+);</pre>
+
+<h4 id="EventObserver-until()-Parameters"><a href="#EventObserver-until()-Parameters">Parameters</a></h4>
+
+<dl>
+	<dt>callback</dt>
+	<dd>Function that is called when an event occurs.</dd>
+
+	<dl>
+		<dt>event</dt>
+		<dd>Event data that is dispatched</dd>
+	</dl>
+</dl>
+
+<h4 id="EventObserver-until()-Example_usage"><a href="#EventObserver-until()-Example_usage">Example usage</a></h4>
+
+<pre>
+<span data-comment>// log keyCodes until the shift key is pressed</span>
+
+document.<span data-function>on</span>(<span data-string>'keypress'</span>).<span data-function>forEach</span>(<span data-keyword>function</span> (event) {
+	console.<span data-function>log</span>(event.keyCode);
+}).<span data-function>until</span>(<span data-keyword>function</span> (event) {
+	return event.shiftKey;
+});
+</pre>
+
+<!-- DEMO -->
+<p>To see EventObserver in action, visit the <a href="demo.html">live demo</a>.</p>
